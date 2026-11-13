@@ -132,10 +132,10 @@ export default function Hero() {
           >
             <div className="relative w-full max-w-[320px] sm:max-w-[360px] lg:max-w-[390px]">
 
-              {/* Arch container: larger presentation */}
-              <div className="relative w-full aspect-[4/5] max-h-[470px] rounded-t-[150px] sm:rounded-t-[175px] lg:rounded-t-[190px] rounded-b-2xl bg-brand-50 overflow-hidden flex items-end justify-center">
+              {/* Photo container */}
+              <div className="relative w-full aspect-[4/5] max-h-[470px] overflow-hidden flex items-end justify-center">
 
-                {/* Developer Photo with multiply blend mode so pure white background seamlessly merges */}
+                {/* Developer Photo */}
                 <img
                   src="/hero.jpg"
                   alt="Hamza, MERN Stack Developer"
