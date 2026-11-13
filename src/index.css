@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+@import "tailwindcss";
+
+:root {
+  --brand: #7E22CE;
+  --brand-dark: #581C87;
+  --brand-50: #FAF5FF;
+  --brand-200: #E9D5FF;
+}
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --color-brand: var(--brand);
+  --color-brand-dark: var(--brand-dark);
+  --color-brand-50: var(--brand-50);
+  --color-brand-200: var(--brand-200);
+
+  /* Legacy primary aliases mapped to brand tokens */
+  --color-primary: var(--brand);
+  --color-primary-50: var(--brand-50);
+  --color-primary-100: #F3E8FF;
+  --color-primary-200: var(--brand-200);
+  --color-primary-300: #D8B4FE;
+  --color-primary-400: #C084FC;
+  --color-primary-500: var(--brand);
+  --color-primary-600: var(--brand);
+  --color-primary-700: var(--brand-dark);
+  --color-primary-800: #581C87;
+  --color-primary-900: #3B0764;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-color: var(--brand) #F1F5F9;
+  scrollbar-width: thin;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #FFFFFF;
+  color: #18181B; /* zinc-900 */
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  width: 100%;
+}
+
+/* Selection highlight */
+::selection {
+  background-color: var(--brand);
+  color: #ffffff;
+}
+
+/* Keyboard focus indicator */
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+/* Inputs handle their own focus styles via Tailwind ring */
+input:focus-visible,
+textarea:focus-visible {
+  outline: none;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--brand);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-dark);
+}
+
