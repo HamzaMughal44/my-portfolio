@@ -1,49 +1,43 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Layers, Server, Brain, BarChart3, Database, Monitor, ArrowRight } from 'lucide-react'
+import { Globe, Layout, Server, BarChart3, Monitor, ArrowRight } from 'lucide-react'
+import SectionHeader from '../components/SectionHeader'
 
 const services = [
   {
-    icon: Layers,
-    title: 'Full Stack Web Development',
+    icon: Globe,
+    title: 'Web Application Development',
     description:
-      'Responsive, modern web applications built with React and Next.js on the frontend, backed by Node.js and Express.',
-    points: ['React & Next.js', 'Node.js & Express', 'REST APIs', 'Auth & Session Handling'],
+      'End-to-end full stack web applications built with modern frameworks, tailored to business needs with high performance and reliability.',
+    points: ['Full Stack Architecture', 'Responsive Design', 'API Integration', 'Performance & SEO'],
+  },
+  {
+    icon: Layout,
+    title: 'Frontend Development',
+    description:
+      'Clean, accessible, and high-performance user interfaces crafted with React, Next.js, and modern CSS tooling.',
+    points: ['React & Next.js', 'Tailwind CSS', 'State Management', 'Component Architecture'],
   },
   {
     icon: Server,
-    title: 'API & Backend Development',
+    title: 'Backend Development',
     description:
-      'Structured backend services and REST APIs with data validation, JWT authentication, and secure database connections.',
-    points: ['RESTful API Design', 'JWT Authentication', 'Validation & Middleware', 'Third-party Integrations'],
-  },
-  {
-    icon: Brain,
-    title: 'AI Integrations',
-    description:
-      'Connecting web apps with AI APIs (like OpenAI) for automated document parsing, resume analysis, and smart search.',
-    points: ['OpenAI API Integration', 'Document Parsing', 'Workflow Automation', 'Prompt Handling'],
+      'Robust backend services and REST APIs with secure authentication, request validation, and database operations.',
+    points: ['Node.js & Express', 'RESTful API Design', 'JWT Authentication', 'Validation & Middleware'],
   },
   {
     icon: BarChart3,
-    title: 'ERP & Business Systems',
+    title: 'ERP & Business Applications',
     description:
-      'Custom management software including HR modules, automated payroll calculations, attendance tracking, and reporting.',
-    points: ['HR & Payroll Systems', 'QR Attendance', 'PDF Payslip Generation', 'Admin Dashboards'],
-  },
-  {
-    icon: Database,
-    title: 'Database Architecture',
-    description:
-      'Relational and document database design, schema modeling, and query optimization for reliable data management.',
-    points: ['MongoDB & Mongoose', 'PostgreSQL', 'Supabase', 'Prisma ORM'],
+      'Custom management software including HR workflows, payroll calculations, QR-based attendance, and automated reporting.',
+    points: ['HR & Payroll Systems', 'QR-Code Attendance', 'PDF Report Generation', 'Role-Based Access'],
   },
   {
     icon: Monitor,
-    title: 'Desktop Applications',
+    title: 'Desktop Application Development',
     description:
       'Cross-platform desktop tools built with Electron and React, featuring local SQLite storage and offline-first capabilities.',
-    points: ['Electron & React', 'SQLite / Offline Support', 'Thermal Printer Setup', 'Windows & macOS'],
+    points: ['Electron & React', 'SQLite / Offline Support', 'Thermal Printer Setup', 'Windows & Cross-Platform'],
   },
 ]
 
@@ -67,28 +61,28 @@ function ServiceCard({ icon: Icon, title, description, points, delay }) {
   return (
     <FadeIn delay={delay} className="h-full">
       <article
-        className="group bg-white rounded-2xl border border-zinc-200/90 p-5 md:p-6 h-full flex flex-col
-          hover:-translate-y-0.5 hover:shadow-md hover:border-zinc-300
-          transition-all duration-200 cursor-default"
+        className="group bg-[var(--surface)] rounded-[8px] border border-[var(--border)] p-5 md:p-6 h-full flex flex-col
+          hover:-translate-y-1 hover:border-brand/60 hover:shadow-[0_8px_24px_-4px_rgba(255,90,0,0.12)] shadow-[var(--card-shadow)]
+          transition-all duration-300 cursor-default"
       >
         <div
-          className="w-10 h-10 rounded-xl bg-brand-50 border border-brand-200/50 flex items-center justify-center mb-5 shrink-0 text-brand"
+          className="w-10 h-10 rounded-[6px] bg-brand/10 border border-brand/20 flex items-center justify-center mb-5 shrink-0 text-brand"
           aria-hidden="true"
         >
           <Icon size={20} />
         </div>
 
-        <h3 className="font-bold text-zinc-900 text-base mb-2 leading-snug">
+        <h3 className="font-bold text-[var(--text)] text-base mb-2 leading-snug group-hover:text-brand transition-colors">
           {title}
         </h3>
 
-        <p className="text-zinc-600 text-sm leading-relaxed mb-5 flex-1">
+        <p className="text-[var(--text-muted)] text-sm leading-relaxed mb-5 flex-1">
           {description}
         </p>
 
-        <ul className="flex flex-col gap-2 pt-3 border-t border-zinc-100 mt-auto" role="list">
+        <ul className="flex flex-col gap-2 pt-3 border-t border-[var(--border)] mt-auto" role="list">
           {points.map((point) => (
-            <li key={point} className="flex items-center gap-2 text-xs text-zinc-600">
+            <li key={point} className="flex items-center gap-2 text-xs text-[var(--text-muted)]">
               <span
                 className="w-1.5 h-1.5 bg-brand rounded-full shrink-0"
                 aria-hidden="true"
@@ -109,21 +103,15 @@ export default function Services() {
   }
 
   return (
-    <section id="services" className="scroll-mt-[88px] py-16 md:py-20 lg:py-24 bg-white border-t border-zinc-100">
+    <section id="services" className="scroll-mt-[88px] py-16 md:py-20 lg:py-24 bg-[var(--bg)] border-t border-[var(--border)] transition-colors duration-200">
       <div className="max-w-6xl mx-auto px-6 md:px-8">
 
         <FadeIn>
-          <div>
-            <p className="text-xs font-bold tracking-widest text-brand-dark uppercase mb-3">
-              SERVICES
-            </p>
-            <h2 className="text-3xl sm:text-4xl font-bold text-zinc-900 tracking-tight leading-tight mb-4">
-              What I Do
-            </h2>
-            <p className="text-zinc-600 text-base max-w-[60ch] mb-12">
-              From user interfaces to backend APIs and databases, here are the core services I provide.
-            </p>
-          </div>
+          <SectionHeader
+            label="SERVICES"
+            title="What I Do"
+            description="From user interfaces to backend APIs and business applications, here are the core services I provide."
+          />
         </FadeIn>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -141,22 +129,22 @@ export default function Services() {
 
         {/* CTA Row below services */}
         <FadeIn delay={0.2}>
-          <div className="mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 p-5 md:p-6 rounded-2xl bg-zinc-50 border border-zinc-200/80">
+          <div className="mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 p-5 md:p-6 rounded-[8px] bg-[var(--surface)] border border-[var(--border)] shadow-[var(--card-shadow)]">
             <div>
-              <h3 className="text-base sm:text-lg font-bold text-zinc-900">
+              <h3 className="text-base sm:text-lg font-bold text-[var(--text)]">
                 Have a project in mind?
               </h3>
-              <p className="text-xs sm:text-sm text-zinc-600 mt-0.5">
+              <p className="text-xs sm:text-sm text-[var(--text-muted)] mt-0.5">
                 Let's discuss how I can help bring your ideas to life.
               </p>
             </div>
             <a
               href="#contact"
               onClick={handleScrollToContact}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand hover:bg-brand-dark text-white font-semibold text-sm transition-all shadow-sm shadow-brand/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand shrink-0"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-[6px] bg-brand hover:bg-brand-dark text-white font-semibold text-xs sm:text-sm shadow-xs transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand cursor-pointer shrink-0"
             >
               <span>Get in touch</span>
-              <ArrowRight size={15} aria-hidden="true" />
+              <ArrowRight size={14} aria-hidden="true" />
             </a>
           </div>
         </FadeIn>

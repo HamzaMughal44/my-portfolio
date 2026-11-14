@@ -2,32 +2,100 @@
 
 @import "tailwindcss";
 
+/* ── Dark Theme Tokens (Default) ── */
 :root {
-  --brand: #7E22CE;
-  --brand-dark: #581C87;
-  --brand-50: #FAF5FF;
-  --brand-200: #E9D5FF;
+  --bg: #0B0B0B;
+  --surface: #141414;
+  --surface-2: #1A1A1A;
+  --border: #262626;
+  --text: #F9FAFB;
+  --text-muted: #9CA3AF;
+  --text-dim: #6B7280;
+  --brand: #FF5A00;
+  --brand-dark: #E64F00;
+  --brand-tint: rgba(255, 90, 0, 0.12);
+  --brand-glow: rgba(255, 90, 0, 0.25);
+  --brand-50: rgba(255, 90, 0, 0.15);
+  --brand-200: rgba(255, 90, 0, 0.35);
+  --nav-bg: rgba(20, 20, 20, 0.90);
+  --nav-border: rgba(38, 38, 38, 0.90);
+  --nav-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.60);
+  --card-bg: #141414;
+  --card-border: #262626;
+  --card-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.40);
+  --vignette-color: #0B0B0B;
+}
+
+[data-theme="dark"] {
+  --bg: #0B0B0B;
+  --surface: #141414;
+  --surface-2: #1A1A1A;
+  --border: #262626;
+  --text: #F9FAFB;
+  --text-muted: #9CA3AF;
+  --text-dim: #6B7280;
+  --brand: #FF5A00;
+  --brand-dark: #E64F00;
+  --brand-tint: rgba(255, 90, 0, 0.12);
+  --brand-glow: rgba(255, 90, 0, 0.25);
+  --brand-50: rgba(255, 90, 0, 0.15);
+  --brand-200: rgba(255, 90, 0, 0.35);
+  --nav-bg: rgba(20, 20, 20, 0.90);
+  --nav-border: rgba(38, 38, 38, 0.90);
+  --nav-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.60);
+  --card-bg: #141414;
+  --card-border: #262626;
+  --card-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.40);
+  --vignette-color: #0B0B0B;
+}
+
+/* ── Light Theme Tokens ── */
+[data-theme="light"] {
+  --bg: #FFFFFF;
+  --surface: #FFFFFF;
+  --surface-2: #F8F9FA;
+  --border: #E5E7EB;
+  --text: #111827;
+  --text-muted: #4B5563;
+  --text-dim: #6B7280;
+  --brand: #FF5A00;
+  --brand-dark: #E64F00;
+  --brand-tint: rgba(255, 90, 0, 0.10);
+  --brand-glow: rgba(255, 90, 0, 0.20);
+  --brand-50: #FFF7ED;
+  --brand-200: #FED7AA;
+  --nav-bg: rgba(255, 255, 255, 0.88);
+  --nav-border: rgba(229, 231, 235, 0.85);
+  --nav-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+  --card-bg: #FFFFFF;
+  --card-border: #E5E7EB;
+  --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
+  --vignette-color: #FFFFFF;
 }
 
 @theme {
   --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-text-dim: var(--text-dim);
   --color-brand: var(--brand);
   --color-brand-dark: var(--brand-dark);
   --color-brand-50: var(--brand-50);
   --color-brand-200: var(--brand-200);
+  --color-brand-tint: var(--brand-tint);
 
-  /* Legacy primary aliases mapped to brand tokens */
+  /* Legacy aliases */
   --color-primary: var(--brand);
   --color-primary-50: var(--brand-50);
-  --color-primary-100: #F3E8FF;
+  --color-primary-100: var(--brand-50);
   --color-primary-200: var(--brand-200);
-  --color-primary-300: #D8B4FE;
-  --color-primary-400: #C084FC;
   --color-primary-500: var(--brand);
   --color-primary-600: var(--brand);
   --color-primary-700: var(--brand-dark);
-  --color-primary-800: #581C87;
-  --color-primary-900: #3B0764;
 }
 
 * {
@@ -36,27 +104,31 @@
 
 html {
   scroll-behavior: smooth;
-  scrollbar-color: var(--brand) #F1F5F9;
+  scrollbar-color: var(--border) var(--bg);
   scrollbar-width: thin;
+  background-color: var(--bg);
+  color: var(--text-muted);
 }
 
 body {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  background-color: #FFFFFF;
-  color: #18181B; /* zinc-900 */
+  background-color: var(--bg);
+  color: var(--text-muted);
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 #root {
   width: 100%;
+  background-color: var(--bg);
 }
 
 /* Selection highlight */
 ::selection {
   background-color: var(--brand);
-  color: #ffffff;
+  color: #FFFFFF;
 }
 
 /* Keyboard focus indicator */
@@ -65,7 +137,7 @@ body {
   outline-offset: 2px;
 }
 
-/* Inputs handle their own focus styles via Tailwind ring */
+/* Inputs handle their own focus styles via ring */
 input:focus-visible,
 textarea:focus-visible {
   outline: none;
@@ -75,13 +147,12 @@ textarea:focus-visible {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #F1F5F9;
+  background: var(--bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--brand);
+  background: var(--border);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--brand-dark);
+  background: var(--brand);
 }
-

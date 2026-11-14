@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence, LayoutGroup } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Sun, Moon } from 'lucide-react'
+import { useTheme } from '../context/ThemeContext'
 
 const navLinks = [
   { label: 'Home',       id: 'home' },
@@ -16,6 +17,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
+  const { theme, toggleTheme } = useTheme()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -23,14 +25,12 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Clear any lingering URL hash on load to keep URL clean (landing page)
   useEffect(() => {
     if (window.location.hash) {
       window.history.replaceState(null, '', window.location.pathname)
     }
   }, [])
 
-  // Scrollspy: track active section accurately
   useEffect(() => {
     const sectionIds = navLinks.map((link) => link.id)
 
@@ -75,85 +75,105 @@ export default function Navbar() {
 
   return (
     <header className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-6xl px-6 md:px-8 pointer-events-auto">
-      {/* ── Floating Rounded Glassy Pill Bar (Height: 64px, Top offset: 16px, 1152px grid) ── */}
       <div
-        className={`w-full h-16 px-6 rounded-full transition-all duration-300 flex items-center justify-between border ${
+        className={`w-full h-16 px-4 sm:px-6 rounded-[8px] transition-all duration-300 flex items-center justify-between border ${
           scrolled
-            ? 'bg-white/85 border-zinc-300/80 shadow-[0_14px_40px_-5px_rgba(0,0,0,0.10),inset_0_1px_0_0_rgba(255,255,255,1)]'
-            : 'bg-white/70 border-zinc-200/80 shadow-[0_10px_35px_-5px_rgba(0,0,0,0.06),inset_0_1px_0_0_rgba(255,255,255,0.95)]'
+            ? 'bg-[var(--nav-bg)] border-[var(--nav-border)] shadow-[var(--nav-shadow)]'
+            : 'bg-[var(--nav-bg)] border-[var(--nav-border)] shadow-[var(--nav-shadow)]'
         }`}
         style={{
-          backdropFilter: 'blur(20px) saturate(180%)',
-          WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
         }}
       >
-        {/* Brand: 20px, font-semibold */}
+        {/* Brand */}
         <a
           href="#home"
           onClick={(e) => handleNavClick(e, 'home')}
-          className="font-semibold text-[20px] tracking-tight text-brand select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-full"
+          className="font-semibold text-[20px] tracking-tight text-[var(--text)] select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-[6px]"
           aria-label="Hamza Home"
         >
           Hamza
         </a>
 
-        {/* Desktop Navigation Links: 15px, font-medium, 8px 14px padding, 4px gap */}
-        <LayoutGroup id="glassyTopNav">
-          <nav className="hidden md:flex items-center gap-1" aria-label="Main Navigation">
-            {navLinks.map(({ label, id }) => {
-              const active = activeSection === id
-              return (
-                <a
-                  key={id}
-                  href={`#${id}`}
-                  onClick={(e) => handleNavClick(e, id)}
-                  aria-current={active ? 'page' : undefined}
-                  className={`relative px-2.5 lg:px-[14px] py-2 text-[15px] font-medium rounded-full transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand ${
-                    active
-                      ? 'text-brand-dark'
-                      : 'text-zinc-600 hover:text-brand-dark hover:bg-zinc-100/60'
-                  }`}
-                >
-                  {/* Glassy active indicator pill */}
-                  {active && (
-                    <motion.span
-                      layoutId="activeGlassyNavPill"
-                      aria-hidden="true"
-                      className="absolute inset-0 rounded-full bg-brand-50 -z-10 border border-brand-200 shadow-2xs"
-                      transition={{ type: 'spring', stiffness: 420, damping: 32 }}
-                    />
-                  )}
-                  {label}
-                </a>
-              )
-            })}
-          </nav>
-        </LayoutGroup>
+        {/* Desktop Navigation Links */}
+        <div className="hidden md:flex items-center gap-1">
+          <LayoutGroup id="themeTopNav">
+            <nav className="flex items-center gap-1" aria-label="Main Navigation">
+              {navLinks.map(({ label, id }) => {
+                const active = activeSection === id
+                return (
+                  <a
+                    key={id}
+                    href={`#${id}`}
+                    onClick={(e) => handleNavClick(e, id)}
+                    aria-current={active ? 'page' : undefined}
+                    className={`relative px-3 lg:px-4 py-2 text-[15px] font-medium rounded-[6px] transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand ${
+                      active
+                        ? 'text-white font-semibold'
+                        : 'text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--surface-2)]'
+                    }`}
+                  >
+                    {active && (
+                      <motion.span
+                        layoutId="activeThemeNavPill"
+                        aria-hidden="true"
+                        className="absolute inset-0 rounded-[6px] bg-brand -z-10 shadow-sm"
+                        transition={{ type: 'spring', stiffness: 450, damping: 35 }}
+                      />
+                    )}
+                    {label}
+                  </a>
+                )
+              })}
+            </nav>
+          </LayoutGroup>
 
-        {/* Mobile Hamburger Button */}
-        <button
-          className="md:hidden p-2 rounded-full text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100/80 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
-          onClick={() => setMenuOpen((v) => !v)}
-          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-          aria-expanded={menuOpen}
-        >
-          {menuOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
+          {/* Theme Toggle Button (Desktop) */}
+          <button
+            onClick={toggleTheme}
+            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+            title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+            className="p-2 ml-2 rounded-[6px] text-[var(--text-muted)] hover:text-brand hover:bg-[var(--surface-2)] transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand cursor-pointer"
+          >
+            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
+        </div>
+
+        {/* Mobile controls */}
+        <div className="flex md:hidden items-center gap-1">
+          <button
+            onClick={toggleTheme}
+            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+            title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+            className="p-2 rounded-[6px] text-[var(--text-muted)] hover:text-brand hover:bg-[var(--surface-2)] transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand cursor-pointer"
+          >
+            {theme === 'dark' ? <Sun size={19} /> : <Moon size={19} />}
+          </button>
+
+          <button
+            className="p-2 rounded-[6px] text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand cursor-pointer"
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
+          >
+            {menuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
       </div>
 
-      {/* ── Mobile Glassy Dropdown Menu ────────────────────────────── */}
+      {/* ── Mobile Dropdown Menu ── */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -8, scale: 0.97 }}
+            initial={{ opacity: 0, y: -8, scale: 0.98 }}
             animate={{ opacity: 1, y: 8, scale: 1 }}
-            exit={{ opacity: 0, y: -8, scale: 0.97 }}
-            transition={{ duration: 0.18, ease: 'easeOut' }}
-            className="md:hidden p-3 rounded-3xl border border-zinc-200/80 shadow-[0_12px_36px_0_rgba(0,0,0,0.12)] overflow-hidden mt-2"
+            exit={{ opacity: 0, y: -8, scale: 0.98 }}
+            transition={{ duration: 0.16, ease: 'easeOut' }}
+            className="md:hidden p-2.5 rounded-[8px] border border-[var(--border)] bg-[var(--nav-bg)] shadow-[var(--nav-shadow)] overflow-hidden mt-2"
             style={{
-              backgroundColor: 'rgba(255, 255, 255, 0.82)',
-              backdropFilter: 'blur(24px) saturate(180%)',
-              WebkitBackdropFilter: 'blur(24px) saturate(180%)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
             }}
           >
             <ul className="flex flex-col gap-1">
@@ -164,15 +184,15 @@ export default function Navbar() {
                     <a
                       href={`#${id}`}
                       onClick={(e) => handleNavClick(e, id)}
-                      className={`flex items-center justify-between px-4 py-2.5 rounded-2xl text-[15px] font-medium transition-colors duration-150 ${
+                      className={`flex items-center justify-between px-3.5 py-2.5 rounded-[6px] text-[15px] font-medium transition-colors duration-150 ${
                         active
-                          ? 'bg-brand-50 text-brand-dark'
-                          : 'text-zinc-600 hover:text-brand-dark hover:bg-zinc-100/70'
+                          ? 'bg-brand text-white font-semibold'
+                          : 'text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--surface-2)]'
                       }`}
                     >
                       {label}
                       {active && (
-                        <span className="w-1.5 h-1.5 rounded-full bg-brand-dark shrink-0" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-white shrink-0" />
                       )}
                     </a>
                   </li>

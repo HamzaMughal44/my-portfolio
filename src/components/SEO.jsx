@@ -31,7 +31,6 @@ export default function SEO() {
 
       {/* Technical */}
       <meta name="robots" content="index, follow" />
-      <meta name="theme-color" content="#7E22CE" />
     </Helmet>
   )
 }

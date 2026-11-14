@@ -2,20 +2,20 @@ import { motion } from 'framer-motion'
 import { useEffect, useRef } from 'react'
 import Typed from 'typed.js'
 
-// ── Typed text ────────────────────────────────────────────────────────────────
+// ── Typed text (Rotating titles) ──────────────────────────────────────────────
 function TypingText() {
   const el = useRef(null)
   useEffect(() => {
     const typed = new Typed(el.current, {
       strings: [
-        'Full Stack Developer',
         'MERN Stack Developer',
-        'React & Node.js Dev',
+        'Software Developer',
+        'Building Digital Products',
       ],
-      typeSpeed: 75,
-      backSpeed: 45,
-      backDelay: 2000,
-      startDelay: 500,
+      typeSpeed: 70,
+      backSpeed: 40,
+      backDelay: 2200,
+      startDelay: 400,
       showCursor: true,
       cursorChar: '|',
       contentType: 'null',
@@ -28,7 +28,7 @@ function TypingText() {
 
 // ── Animation variants ────────────────────────────────────────────────────────
 const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 16 },
   visible: (delay = 0) => ({
     opacity: 1,
     y: 0,
@@ -37,11 +37,11 @@ const fadeUp = {
 }
 
 const photoEntrance = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.65, delay: 0.15, ease: [0.22, 1, 0.36, 1] },
   },
 }
 
@@ -50,112 +50,151 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center pt-28 sm:pt-32 pb-16 overflow-hidden bg-white"
+      className="relative min-h-screen flex items-center pt-24 sm:pt-28 pb-12 sm:pb-16 overflow-hidden bg-[var(--bg)] transition-colors duration-200"
     >
-      <div className="relative max-w-6xl mx-auto px-6 md:px-8 w-full z-10">
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+      <div className="relative max-w-6xl mx-auto px-6 md:px-8 w-full z-10 grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
 
-          {/* ── LEFT COLUMN: Text & CTAs (7 Cols on desktop) ─────────────────── */}
-          <div className="lg:col-span-7 flex flex-col justify-center">
+        {/* ── LEFT COLUMN: Text block ── */}
+        <div className="lg:col-span-7 flex flex-col justify-center self-center py-4 sm:py-6 lg:py-8 z-20">
 
-            {/* Heading */}
-            <motion.h1
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              custom={0.05}
-              className="text-4xl sm:text-5xl lg:text-[3.5rem] font-bold leading-[1.15] tracking-tight text-zinc-900 mb-6"
-            >
-              Hi, I'm{' '}
-              <span className="text-brand">
-                Hamza
-              </span>
-              <br />
-              <span className="text-brand text-[0.82em] font-semibold">
-                <TypingText />
-              </span>
-            </motion.h1>
-
-            {/* Bio (Single concise sentence) */}
-            <motion.p
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              custom={0.12}
-              className="text-zinc-600 text-base sm:text-lg leading-relaxed mb-8 max-w-xl"
-            >
-              Full-stack developer building clean, high-performance web apps with React, Next.js, and Node.js.
-            </motion.p>
-
-            {/* CTA buttons */}
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              custom={0.18}
-              className="flex flex-wrap items-center gap-3 sm:gap-4"
-            >
-              <a
-                href="#projects"
-                onClick={(e) => {
-                  e.preventDefault()
-                  document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
-                }}
-                className="inline-flex items-center justify-center px-6 py-3 rounded-full
-                  bg-brand hover:bg-brand-dark
-                  text-white font-semibold text-sm active:scale-[0.98] transition-all shadow-md shadow-brand/25 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
-              >
-                View Projects
-              </a>
-              <a
-                href="#contact"
-                onClick={(e) => {
-                  e.preventDefault()
-                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
-                }}
-                className="inline-flex items-center justify-center px-6 py-3 rounded-full border border-zinc-300
-                  text-zinc-700 font-semibold text-sm hover:border-brand-200 hover:text-brand-dark hover:bg-brand-50
-                  active:scale-[0.98] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
-              >
-                Contact Me
-              </a>
-            </motion.div>
-
-          </div>
-
-          {/* ── RIGHT COLUMN: Clean Arch Photo Container (5 Cols on desktop) ─── */}
+          {/* Accent Tag: Hello, I'm with downward triangle tail */}
           <motion.div
-            variants={photoEntrance}
+            variants={fadeUp}
             initial="hidden"
             animate="visible"
-            className="lg:col-span-5 flex justify-center lg:justify-end"
+            custom={0.02}
+            className="relative inline-block mb-3.5 self-start"
           >
-            <div className="relative w-full max-w-[320px] sm:max-w-[360px] lg:max-w-[390px]">
+            <span className="inline-flex items-center px-3 py-1 bg-brand text-white text-xs font-semibold rounded-[4px] tracking-wide shadow-xs">
+              Hello, I'm
+            </span>
+            <span
+              className="absolute left-4 top-full w-0 h-0 border-x-[5px] border-x-transparent border-t-[5px] border-t-brand"
+              aria-hidden="true"
+            />
+          </motion.div>
 
-              {/* Photo container */}
-              <div className="relative w-full aspect-[4/5] max-h-[470px] overflow-hidden flex items-end justify-center">
+          {/* Heading */}
+          <motion.h1
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            custom={0.06}
+            className="text-4xl sm:text-5xl lg:text-[3.5rem] font-bold leading-[1.12] tracking-tight text-[var(--text)] mb-2.5 text-left"
+          >
+            Hamza Mughal
+          </motion.h1>
 
-                {/* Developer Photo */}
-                <img
-                  src="/hero.jpg"
-                  alt="Hamza, MERN Stack Developer"
-                  className="w-full h-full object-cover object-top mix-blend-multiply select-none"
-                  loading="eager"
-                />
+          {/* Typed Role Line */}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            custom={0.10}
+            className="text-2xl sm:text-3xl font-semibold text-brand mb-6 text-left"
+          >
+            <TypingText />
+          </motion.div>
 
-                {/* Soft bottom edge softening */}
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-x-0 bottom-0 h-10 sm:h-12 bg-gradient-to-t from-white via-white/40 to-transparent pointer-events-none"
-                />
+          {/* Bio Description */}
+          <motion.p
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            custom={0.14}
+            className="text-[var(--text-muted)] text-base sm:text-lg leading-relaxed mb-8 max-w-[500px] text-left"
+          >
+            I build scalable, high-performance web applications with React, Next.js, and Node.js.
+          </motion.p>
 
-              </div>
-
-            </div>
+          {/* CTA buttons */}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            custom={0.18}
+            className="flex flex-wrap items-center gap-3 sm:gap-4 self-start"
+          >
+            <a
+              href="#projects"
+              onClick={(e) => {
+                e.preventDefault()
+                document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
+              }}
+              className="inline-flex items-center justify-center px-6 py-3 rounded-[6px]
+                bg-brand hover:bg-brand-dark
+                text-white font-semibold text-sm active:scale-[0.98] transition-all shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-brand cursor-pointer"
+            >
+              View Projects
+            </a>
+            <a
+              href="#contact"
+              onClick={(e) => {
+                e.preventDefault()
+                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+              }}
+              className="inline-flex items-center justify-center px-6 py-3 rounded-[6px] border border-[var(--border)]
+                text-[var(--text)] font-semibold text-sm hover:border-brand hover:text-brand hover:bg-[var(--surface-2)]
+                active:scale-[0.98] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-brand cursor-pointer"
+            >
+              Contact Me
+            </a>
           </motion.div>
 
         </div>
+
+        {/* ── RIGHT COLUMN: Anchored Photo ── */}
+        <motion.div
+          variants={photoEntrance}
+          initial="hidden"
+          animate="visible"
+          className="lg:col-span-5 flex justify-center lg:justify-end self-center justify-self-end relative z-10 w-full"
+        >
+          <div className="relative flex flex-col items-center lg:items-end w-full max-w-[320px] sm:max-w-[350px] lg:max-w-none lg:w-auto">
+
+            <div
+              className="relative z-[2] flex items-end justify-center lg:justify-end overflow-hidden"
+              style={{
+                WebkitMaskImage: 'linear-gradient(to bottom, black 84%, transparent 100%)',
+                maskImage: 'linear-gradient(to bottom, black 84%, transparent 100%)',
+              }}
+            >
+              <img
+                src="/hamza-cutout.png"
+                alt="Hamza Mughal, Software Developer"
+                className="h-auto lg:h-[460px] xl:h-[480px] w-full lg:w-auto max-w-[300px] sm:max-w-[340px] lg:max-w-none object-contain object-bottom select-none"
+                loading="eager"
+              />
+
+              <div
+                aria-hidden="true"
+                className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[var(--bg)] via-[var(--bg)]/40 to-transparent pointer-events-none"
+              />
+            </div>
+
+          </div>
+        </motion.div>
+
       </div>
+
+      {/* Desktop Scroll Down Indicator */}
+      <a
+        href="#about"
+        onClick={(e) => {
+          e.preventDefault()
+          document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
+        }}
+        className="hidden lg:flex flex-col items-center gap-1.5 absolute bottom-4 left-1/2 -translate-x-1/2 z-30 text-xs text-[var(--text-dim)] hover:text-brand transition-colors focus:outline-none cursor-pointer"
+        aria-label="Scroll to About section"
+      >
+        <div className="w-5 h-8 rounded-full border border-brand/50 flex items-start justify-center p-1">
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}
+            className="w-1 h-2 rounded-full bg-brand motion-reduce:transform-none"
+          />
+        </div>
+      </a>
     </section>
   )
 }

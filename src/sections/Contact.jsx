@@ -7,6 +7,7 @@ import {
   Mail, Send, CheckCircle, AlertCircle, ArrowUpRight,
 } from 'lucide-react'
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa'
+import SectionHeader from '../components/SectionHeader'
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -52,17 +53,17 @@ const contactLinks = [
 // ── Input styling ─────────────────────────────────────────────────────────────
 
 const inputBase =
-  'w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-sm text-zinc-900 placeholder-zinc-400 outline-none transition-all focus:bg-white focus:ring-2 focus:ring-brand focus:border-brand hover:border-zinc-300'
+  'w-full bg-[var(--surface-2)] border border-[var(--border)] rounded-[8px] px-4 py-3 text-sm text-[var(--text)] placeholder-[var(--text-dim)] outline-none transition-all focus:bg-[var(--surface)] focus:border-brand focus:ring-2 focus:ring-brand/25 hover:border-brand/40'
 const inputError =
-  'w-full bg-zinc-50 border border-red-400 rounded-xl px-4 py-3 text-sm text-zinc-900 placeholder-zinc-400 outline-none transition-all focus:bg-white focus:ring-2 focus:ring-red-400 focus:border-transparent'
+  'w-full bg-[var(--surface-2)] border border-red-500 rounded-[8px] px-4 py-3 text-sm text-[var(--text)] placeholder-[var(--text-dim)] outline-none transition-all focus:bg-[var(--surface)] focus:ring-2 focus:ring-red-500/25 focus:border-red-500'
 
 const inputClass = (hasError) => (hasError ? inputError : inputBase)
 
-// ── Merged Contact Card (3 compact rows in 1 card) ───────────────────────────
+// ── Merged Contact Card ───────────────────────────────────────────────────────
 
 function UnifiedContactCard({ className = '' }) {
   return (
-    <div className={`rounded-2xl border border-zinc-200/90 bg-white shadow-xs divide-y divide-zinc-100 overflow-hidden flex flex-col ${className}`}>
+    <div className={`rounded-[8px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--card-shadow)] divide-y divide-[var(--border)] overflow-hidden flex flex-col ${className}`}>
       {contactLinks.map(({ icon: Icon, label, value, href }) => (
         <a
           key={label}
@@ -70,20 +71,20 @@ function UnifiedContactCard({ className = '' }) {
           target={href.startsWith('mailto') ? undefined : '_blank'}
           rel="noopener noreferrer"
           aria-label={`${label}: ${value}`}
-          className="group flex-1 flex items-center gap-3.5 sm:gap-4 p-4.5 sm:p-5 hover:bg-zinc-50/70 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+          className="group flex-1 flex items-center gap-3.5 sm:gap-4 p-4.5 sm:p-5 hover:bg-[var(--surface-2)] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
         >
           <div
             aria-hidden="true"
-            className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-brand-50 border border-brand-200/50 flex items-center justify-center shrink-0 text-brand group-hover:bg-brand group-hover:text-white transition-all duration-200"
+            className="w-10 h-10 sm:w-11 sm:h-11 rounded-[6px] bg-brand/10 border border-brand/20 flex items-center justify-center shrink-0 text-brand group-hover:bg-brand group-hover:text-white transition-all duration-150"
           >
             <Icon size={18} />
           </div>
 
           <div className="min-w-0 flex-1 overflow-hidden">
-            <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-0.5">
+            <p className="text-[10px] font-bold text-[var(--text-dim)] uppercase tracking-widest mb-0.5">
               {label}
             </p>
-            <p className="text-sm font-semibold text-zinc-800 truncate group-hover:text-brand-dark transition-colors duration-200">
+            <p className="text-sm font-semibold text-[var(--text)] truncate group-hover:text-brand transition-colors duration-150">
               {value}
             </p>
           </div>
@@ -91,7 +92,7 @@ function UnifiedContactCard({ className = '' }) {
           <ArrowUpRight
             size={16}
             aria-hidden="true"
-            className="text-zinc-400 group-hover:text-brand shrink-0 transition-colors duration-200"
+            className="text-[var(--text-dim)] group-hover:text-brand shrink-0 transition-colors duration-150"
           />
         </a>
       ))}
@@ -109,18 +110,18 @@ function SuccessState({ onReset }) {
       transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
       className="flex flex-col items-center justify-center py-12 text-center gap-4 h-full"
     >
-      <div className="w-14 h-14 rounded-full bg-brand-50 border border-brand-200 flex items-center justify-center">
-        <CheckCircle size={26} className="text-brand" />
+      <div className="w-14 h-14 rounded-[8px] bg-brand/10 border border-brand/30 flex items-center justify-center">
+        <CheckCircle size={28} className="text-brand" />
       </div>
       <div>
-        <h3 className="font-bold text-zinc-900 text-lg mb-1">Message sent!</h3>
-        <p className="text-zinc-600 text-sm max-w-xs">
-          Thanks for reaching out. I'll get back to you within 24 hours.
+        <h3 className="font-bold text-[var(--text)] text-lg mb-1">Message sent!</h3>
+        <p className="text-[var(--text-muted)] text-sm max-w-xs">
+          Thanks for reaching out. I'll get back to you shortly.
         </p>
       </div>
       <button
         onClick={onReset}
-        className="text-xs font-semibold px-4 py-2 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-800 transition-colors mt-2"
+        className="text-xs font-semibold px-4 py-2 rounded-[6px] bg-[var(--surface-2)] hover:bg-[var(--surface)] border border-[var(--border)] text-[var(--text)] transition-colors mt-2 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
       >
         Send another message
       </button>
@@ -147,7 +148,7 @@ function Spinner() {
 // ── Contact form ──────────────────────────────────────────────────────────────
 
 function ContactForm() {
-  const [submitState, setSubmitState] = useState('idle') // idle | loading | success | error
+  const [submitState, setSubmitState] = useState('idle')
   const {
     register,
     handleSubmit,
@@ -179,7 +180,7 @@ function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate className="flex flex-col h-full gap-5">
-      {/* Honeypot — hidden from real users */}
+      {/* Honeypot */}
       <input
         type="text"
         tabIndex={-1}
@@ -194,9 +195,9 @@ function ContactForm() {
         <div>
           <label
             htmlFor="contact-name"
-            className="block text-xs font-bold text-zinc-700 uppercase tracking-wider mb-1.5"
+            className="block text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mb-1.5"
           >
-            Name <span className="text-brand-dark">*</span>
+            Name <span className="text-brand">*</span>
           </label>
           <input
             id="contact-name"
@@ -210,7 +211,7 @@ function ContactForm() {
             className={inputClass(errors.name)}
           />
           {errors.name && (
-            <p id="name-error" role="alert" className="mt-1.5 text-xs text-red-600">
+            <p id="name-error" role="alert" className="mt-1.5 text-xs text-red-500">
               {errors.name.message}
             </p>
           )}
@@ -220,9 +221,9 @@ function ContactForm() {
         <div>
           <label
             htmlFor="contact-email"
-            className="block text-xs font-bold text-zinc-700 uppercase tracking-wider mb-1.5"
+            className="block text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mb-1.5"
           >
-            Email <span className="text-brand-dark">*</span>
+            Email <span className="text-brand">*</span>
           </label>
           <input
             id="contact-email"
@@ -242,20 +243,20 @@ function ContactForm() {
             className={inputClass(errors.email)}
           />
           {errors.email && (
-            <p id="email-error" role="alert" className="mt-1.5 text-xs text-red-600">
+            <p id="email-error" role="alert" className="mt-1.5 text-xs text-red-500">
               {errors.email.message}
             </p>
           )}
         </div>
       </div>
 
-      {/* Message (flex-1 to stretch vertically in equal-height container) */}
+      {/* Message */}
       <div className="flex flex-col flex-1">
         <label
           htmlFor="contact-message"
-          className="block text-xs font-bold text-zinc-700 uppercase tracking-wider mb-1.5"
+          className="block text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mb-1.5"
         >
-          Message <span className="text-brand-dark">*</span>
+          Message <span className="text-brand">*</span>
         </label>
         <textarea
           id="contact-message"
@@ -271,7 +272,7 @@ function ContactForm() {
           className={`${inputClass(errors.message)} resize-none flex-1 min-h-[110px]`}
         />
         {errors.message && (
-          <p id="message-error" role="alert" className="mt-1.5 text-xs text-red-600">
+          <p id="message-error" role="alert" className="mt-1.5 text-xs text-red-500">
             {errors.message.message}
           </p>
         )}
@@ -281,21 +282,21 @@ function ContactForm() {
       {submitState === 'error' && (
         <div
           role="alert"
-          className="flex items-center gap-2.5 p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs"
+          className="flex items-center gap-2.5 p-3.5 rounded-[8px] bg-red-500/10 border border-red-500/30 text-red-500 text-xs"
         >
-          <AlertCircle size={16} className="shrink-0 text-red-600" aria-hidden="true" />
-          <span>Something went wrong with the submission. Your message has been retained. You can email me directly at <a href="mailto:hamzakhankh416@gmail.com" className="font-bold underline">hamzakhankh416@gmail.com</a>.</span>
+          <AlertCircle size={16} className="shrink-0 text-red-500" aria-hidden="true" />
+          <span>Something went wrong with the submission. You can email me directly at <a href="mailto:hamzakhankh416@gmail.com" className="font-bold underline text-[var(--text)]">hamzakhankh416@gmail.com</a>.</span>
         </div>
       )}
 
-      {/* Submit Button (Pinned to bottom) */}
+      {/* Submit Button */}
       <div className="pt-1 mt-auto">
         <button
           type="submit"
           disabled={submitState === 'loading'}
-          className="w-fit px-8 py-3 bg-brand hover:bg-brand-dark text-white font-semibold rounded-full
-            inline-flex items-center gap-2 shadow-sm shadow-brand/20
-            disabled:opacity-60 disabled:cursor-not-allowed active:scale-[0.98] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+          className="w-fit px-8 py-3 bg-brand hover:bg-brand-dark text-white font-semibold rounded-[6px]
+            inline-flex items-center gap-2 shadow-sm
+            disabled:opacity-60 disabled:cursor-not-allowed active:scale-[0.98] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-brand cursor-pointer"
         >
           {submitState === 'loading' ? (
             <>
@@ -318,40 +319,34 @@ function ContactForm() {
 
 export default function Contact() {
   return (
-    <section id="contact" className="scroll-mt-[88px] py-16 md:py-20 lg:py-24 bg-white border-t border-zinc-100">
+    <section id="contact" className="scroll-mt-[88px] py-16 md:py-20 lg:py-24 bg-[var(--bg)] border-t border-[var(--border)] transition-colors duration-200">
       <div className="max-w-6xl mx-auto px-6 md:px-8">
 
         {/* Header */}
         <FadeIn>
-          <div>
-            <p className="text-xs font-bold tracking-widest text-brand-dark uppercase mb-3">
-              CONTACT
-            </p>
-            <h2 className="text-3xl sm:text-4xl font-bold text-zinc-900 tracking-tight leading-tight mb-4">
-              Get In Touch
-            </h2>
-            <p className="text-zinc-600 text-base max-w-[60ch] mb-12">
-              Open to full-time opportunities. Feel free to reach out about a role, a project, or any questions.
-            </p>
-          </div>
+          <SectionHeader
+            label="CONTACT"
+            title="Get In Touch"
+            description="Open to full-time opportunities. Feel free to reach out about a role, a project, or any questions."
+          />
         </FadeIn>
 
-        {/* 2-column layout (32px gap between columns, items-stretch on desktop for equal height) */}
+        {/* 2-column layout */}
         <div className="grid lg:grid-cols-5 gap-8 items-stretch">
 
-          {/* ── Left column: Links card first on mobile ─────────────────── */}
+          {/* Left column */}
           <FadeIn delay={0.08} className="lg:col-span-2 h-full">
             <div className="h-full flex flex-col justify-between">
               <UnifiedContactCard className="flex-1" />
-              <p className="text-xs text-zinc-400 font-medium px-1 pt-3.5 select-none">
+              <p className="text-xs text-[var(--text-dim)] font-medium px-1 pt-3.5 select-none">
                 Quetta, Pakistan · PKT (UTC+5)
               </p>
             </div>
           </FadeIn>
 
-          {/* ── Right column: Form card stretched to match height ──────── */}
+          {/* Right column */}
           <FadeIn delay={0.14} className="lg:col-span-3 h-full">
-            <div className="bg-white rounded-2xl border border-zinc-200/90 shadow-xs p-5 md:p-6 h-full flex flex-col">
+            <div className="bg-[var(--surface)] rounded-[8px] border border-[var(--border)] shadow-[var(--card-shadow)] p-5 md:p-6 h-full flex flex-col">
               <ContactForm />
             </div>
           </FadeIn>

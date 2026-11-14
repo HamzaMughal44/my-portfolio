@@ -1,4 +1,5 @@
 import { HelmetProvider } from 'react-helmet-async'
+import { ThemeProvider } from './context/ThemeContext'
 import Layout from './components/Layout'
 import SEO from './components/SEO'
 import Hero from './sections/Hero'
@@ -12,16 +13,18 @@ import Contact from './sections/Contact'
 export default function App() {
   return (
     <HelmetProvider>
-      <SEO />
-      <Layout>
-        <Hero />
-        <About />
-        <Projects />
-        <Skills />
-        <Experience />
-        <Services />
-        <Contact />
-      </Layout>
+      <ThemeProvider>
+        <SEO />
+        <Layout>
+          <Hero />
+          <About />
+          <Projects />
+          <Skills />
+          <Experience />
+          <Services />
+          <Contact />
+        </Layout>
+      </ThemeProvider>
     </HelmetProvider>
   )
 }

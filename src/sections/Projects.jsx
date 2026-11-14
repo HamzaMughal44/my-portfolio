@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Lock, ExternalLink } from 'lucide-react'
 import { FaGithub } from 'react-icons/fa'
+import SectionHeader from '../components/SectionHeader'
 
 const projects = [
   {
@@ -66,18 +67,18 @@ function ProjectMedia({ src, alt, type, featured }) {
   const [imgError, setImgError] = useState(false)
 
   return (
-    <div className="relative aspect-[16/10] w-full overflow-hidden bg-zinc-100 border-b border-zinc-200/80 shrink-0">
+    <div className="relative aspect-[16/10] w-full overflow-hidden bg-[var(--surface-2)] border-b border-[var(--border)] shrink-0">
       {!imgError && src ? (
         <img
           src={src}
           alt={alt}
           onError={() => setImgError(true)}
-          className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]"
+          className="w-full h-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.04]"
           loading="lazy"
         />
       ) : (
-        <div className="w-full h-full bg-zinc-100/90 flex items-center justify-center p-4">
-          <span className="text-xs font-mono font-semibold text-zinc-400 select-none">
+        <div className="w-full h-full bg-[var(--surface-2)] flex items-center justify-center p-4">
+          <span className="text-xs font-mono font-semibold text-[var(--text-dim)] select-none">
             {type}
           </span>
         </div>
@@ -85,7 +86,7 @@ function ProjectMedia({ src, alt, type, featured }) {
 
       {/* Small Category Badge */}
       <div className="absolute top-3 left-3 z-10">
-        <span className="bg-white/95 text-zinc-800 text-[10px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-md border border-zinc-200/90 shadow-2xs">
+        <span className="bg-[var(--surface)]/95 text-brand border border-brand/30 text-[10px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-[4px] shadow-sm backdrop-blur-xs">
           {type}
         </span>
       </div>
@@ -93,7 +94,7 @@ function ProjectMedia({ src, alt, type, featured }) {
       {/* Featured Badge */}
       {featured && (
         <div className="absolute top-3 right-3 z-10">
-          <span className="bg-white/95 text-brand-dark text-[10px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-md border border-zinc-200/90 shadow-2xs">
+          <span className="bg-brand text-white text-[10px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-[4px] shadow-sm">
             FEATURED
           </span>
         </div>
@@ -121,7 +122,7 @@ function FadeIn({ children, delay = 0, className = '' }) {
 function ProjectCard({ project, index }) {
   return (
     <FadeIn delay={index * 0.06} className="h-full">
-      <article className="group bg-white rounded-2xl border border-zinc-200/90 h-full flex flex-col overflow-hidden transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md hover:border-zinc-300">
+      <article className="group bg-[var(--surface)] rounded-[8px] border border-[var(--border)] h-full flex flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-brand/60 hover:shadow-[0_8px_24px_-4px_rgba(255,90,0,0.14)] shadow-[var(--card-shadow)]">
         {/* Project Thumbnail */}
         <ProjectMedia
           src={project.image}
@@ -132,31 +133,31 @@ function ProjectCard({ project, index }) {
 
         {/* Content Body */}
         <div className="flex flex-col flex-1 p-5 md:p-6">
-          <h3 className="font-bold text-zinc-900 text-base leading-snug mb-2">
+          <h3 className="font-bold text-[var(--text)] text-base leading-snug mb-2 group-hover:text-brand transition-colors">
             {project.name}
           </h3>
 
-          <p className="text-zinc-600 text-xs sm:text-sm leading-relaxed mb-4">
+          <p className="text-[var(--text-muted)] text-xs sm:text-sm leading-relaxed mb-4">
             {project.description}
           </p>
 
-          {/* Stack Pills (Pinned towards bottom) */}
+          {/* Stack Pills */}
           <div className="mt-auto pt-2">
             <div className="flex flex-wrap items-center gap-1.5 mb-4" aria-label="Tech stack">
               {project.stack.map((tech) => (
                 <span
                   key={tech}
-                  className="px-2 py-0.5 rounded text-[11px] font-medium bg-zinc-50 border border-zinc-200/80 text-zinc-700"
+                  className="px-2 py-0.5 rounded-[4px] text-[11px] font-medium bg-[var(--surface-2)] border border-[var(--border)] text-[var(--text-muted)] transition-colors duration-150 hover:border-brand/40 hover:text-[var(--text)]"
                 >
                   {tech}
                 </span>
               ))}
             </div>
 
-            {/* Links Footer (Pinned to card bottom) */}
-            <div className="pt-3 border-t border-zinc-100 flex items-center justify-between gap-2 text-xs">
+            {/* Links Footer */}
+            <div className="pt-3 border-t border-[var(--border)] flex items-center justify-between gap-2 text-xs">
               {project.isPrivate ? (
-                <span className="inline-flex items-center gap-1.5 text-zinc-400 font-medium text-xs">
+                <span className="inline-flex items-center gap-1.5 text-[var(--text-dim)] font-medium text-xs">
                   <Lock size={12} aria-hidden="true" />
                   Private client project
                 </span>
@@ -168,7 +169,7 @@ function ProjectCard({ project, index }) {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`View ${project.name} source on GitHub`}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-zinc-700 text-xs font-semibold hover:text-zinc-900 hover:bg-zinc-100 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+                      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[4px] text-[var(--text)] text-xs font-semibold hover:text-brand hover:bg-[var(--surface-2)] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
                     >
                       <FaGithub size={13} aria-hidden="true" />
                       GitHub
@@ -183,7 +184,7 @@ function ProjectCard({ project, index }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`View ${project.name} live demo`}
-                  className="inline-flex items-center gap-1 text-brand-dark hover:text-brand hover:underline font-semibold text-xs ml-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+                  className="inline-flex items-center gap-1 text-brand hover:underline font-semibold text-xs ml-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
                 >
                   <span>Live Demo</span>
                   <ExternalLink size={12} aria-hidden="true" />
@@ -199,20 +200,14 @@ function ProjectCard({ project, index }) {
 
 export default function Projects() {
   return (
-    <section id="projects" className="scroll-mt-[88px] py-16 md:py-20 lg:py-24 bg-zinc-50/50 border-t border-zinc-100">
+    <section id="projects" className="scroll-mt-[88px] py-16 md:py-20 lg:py-24 bg-[var(--bg)] border-t border-[var(--border)] transition-colors duration-200">
       <div className="max-w-6xl mx-auto px-6 md:px-8">
         <FadeIn>
-          <div>
-            <p className="text-xs font-bold tracking-widest text-brand-dark uppercase mb-3">
-              WORK
-            </p>
-            <h2 className="text-3xl sm:text-4xl font-bold text-zinc-900 tracking-tight leading-tight mb-4">
-              Selected projects
-            </h2>
-            <p className="text-zinc-600 text-base max-w-[60ch] mb-12">
-              Web applications and desktop software I have built and contributed to.
-            </p>
-          </div>
+          <SectionHeader
+            label="WORK"
+            title="Selected projects"
+            description="Web applications and desktop software I have built and contributed to."
+          />
         </FadeIn>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
