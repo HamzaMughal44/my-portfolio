@@ -74,7 +74,7 @@ export default function Navbar() {
   }
 
   return (
-    <header className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-6xl px-6 md:px-8 pointer-events-auto">
+    <header className="fixed top-3 sm:top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-6xl px-4 sm:px-6 md:px-8 pointer-events-auto">
       <div
         className={`w-full h-16 px-4 sm:px-6 rounded-[8px] transition-all duration-300 flex items-center justify-between border ${
           scrolled

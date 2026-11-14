@@ -52,7 +52,7 @@ export default function Hero() {
       id="home"
       className="relative min-h-screen flex items-center pt-24 sm:pt-28 pb-12 sm:pb-16 overflow-hidden bg-[var(--bg)] transition-colors duration-200"
     >
-      <div className="relative max-w-6xl mx-auto px-6 md:px-8 w-full z-10 grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 md:px-8 w-full z-10 grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
 
         {/* ── LEFT COLUMN: Text block ── */}
         <div className="lg:col-span-7 flex flex-col justify-center self-center py-4 sm:py-6 lg:py-8 z-20">
@@ -80,7 +80,7 @@ export default function Hero() {
             initial="hidden"
             animate="visible"
             custom={0.06}
-            className="text-4xl sm:text-5xl lg:text-[3.5rem] font-bold leading-[1.12] tracking-tight text-[var(--text)] mb-2.5 text-left"
+            className="text-3xl sm:text-5xl lg:text-[3.5rem] font-bold leading-[1.12] tracking-tight text-[var(--text)] mb-2.5 text-left"
           >
             Hamza Mughal
           </motion.h1>
@@ -91,7 +91,7 @@ export default function Hero() {
             initial="hidden"
             animate="visible"
             custom={0.10}
-            className="text-2xl sm:text-3xl font-semibold text-brand mb-6 text-left"
+            className="text-xl sm:text-3xl font-semibold text-brand mb-6 text-left min-h-[36px] flex items-center"
           >
             <TypingText />
           </motion.div>
@@ -102,7 +102,7 @@ export default function Hero() {
             initial="hidden"
             animate="visible"
             custom={0.14}
-            className="text-[var(--text-muted)] text-base sm:text-lg leading-relaxed mb-8 max-w-[500px] text-left"
+            className="text-[var(--text-muted)] text-sm sm:text-base lg:text-lg leading-relaxed mb-8 max-w-[500px] text-left"
           >
             I build scalable, high-performance web applications with React, Next.js, and Node.js.
           </motion.p>
@@ -121,7 +121,7 @@ export default function Hero() {
                 e.preventDefault()
                 document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
               }}
-              className="inline-flex items-center justify-center px-6 py-3 rounded-[6px]
+              className="inline-flex items-center justify-center px-5 sm:px-6 py-2.5 sm:py-3 rounded-[6px]
                 bg-brand hover:bg-brand-dark
                 text-white font-semibold text-sm active:scale-[0.98] transition-all shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-brand cursor-pointer"
             >
@@ -133,7 +133,7 @@ export default function Hero() {
                 e.preventDefault()
                 document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
               }}
-              className="inline-flex items-center justify-center px-6 py-3 rounded-[6px] border border-[var(--border)]
+              className="inline-flex items-center justify-center px-5 sm:px-6 py-2.5 sm:py-3 rounded-[6px] border border-[var(--border)]
                 text-[var(--text)] font-semibold text-sm hover:border-brand hover:text-brand hover:bg-[var(--surface-2)]
                 active:scale-[0.98] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-brand cursor-pointer"
             >
@@ -143,32 +143,35 @@ export default function Hero() {
 
         </div>
 
-        {/* ── RIGHT COLUMN: Anchored Photo ── */}
+        {/* ── RIGHT COLUMN: Anchored Photo with Multi-Directional Feather Mask ── */}
         <motion.div
           variants={photoEntrance}
           initial="hidden"
           animate="visible"
-          className="lg:col-span-5 flex justify-center lg:justify-end self-center justify-self-end relative z-10 w-full"
+          className="lg:col-span-5 flex justify-center lg:justify-end self-center justify-self-end relative z-10 w-full mt-4 lg:mt-0"
         >
-          <div className="relative flex flex-col items-center lg:items-end w-full max-w-[320px] sm:max-w-[350px] lg:max-w-none lg:w-auto">
+          <div className="relative flex flex-col items-center lg:items-end w-full max-w-[280px] sm:max-w-[320px] lg:max-w-[360px] xl:max-w-[380px]">
 
             <div
-              className="relative z-[2] flex items-end justify-center lg:justify-end overflow-hidden"
+              className="relative z-[2] flex items-end justify-center lg:justify-end w-full overflow-hidden"
               style={{
-                WebkitMaskImage: 'linear-gradient(to bottom, black 84%, transparent 100%)',
-                maskImage: 'linear-gradient(to bottom, black 84%, transparent 100%)',
+                WebkitMaskImage: 'linear-gradient(to bottom, black 65%, transparent 100%), linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
+                WebkitMaskComposite: 'source-in',
+                maskImage: 'linear-gradient(to bottom, black 65%, transparent 100%), linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
+                maskComposite: 'intersect',
               }}
             >
               <img
                 src="/hamza-cutout.png"
                 alt="Hamza Mughal, Software Developer"
-                className="h-auto lg:h-[460px] xl:h-[480px] w-full lg:w-auto max-w-[300px] sm:max-w-[340px] lg:max-w-none object-contain object-bottom select-none"
+                className="h-auto max-h-[320px] sm:max-h-[360px] md:max-h-[400px] lg:max-h-[460px] xl:max-h-[480px] w-auto max-w-full object-contain object-bottom select-none"
                 loading="eager"
               />
 
+              {/* Bottom ground fade seamlessly blending into page background */}
               <div
                 aria-hidden="true"
-                className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[var(--bg)] via-[var(--bg)]/40 to-transparent pointer-events-none"
+                className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[var(--bg)] via-[var(--bg)]/60 to-transparent pointer-events-none"
               />
             </div>
 

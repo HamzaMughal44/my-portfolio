@@ -119,14 +119,14 @@
   * Graphic: 20px x 32px pill border in `#FF5A00`/50 with animated bouncing dot in `#FF5A00`
 
 #### Exact Image & Treatment:
-* **Image Path**: `/hamza-cutout.png` (stored in `public/hamza-cutout.png`)
+* **Image Path**: `/hamza-cutout.png` (stored in `public/hamza-cutout.png`, restored with natural smooth anti-aliased alpha edges)
 * **Alt**: `"Hamza Mughal, Software Developer"`
-* **Dimensions**: Mobile/Tablet width `max-w-[300px] sm:max-w-[340px]`, Desktop height `460px` (xl: `480px`), width `auto`, `object-contain object-bottom`
-* **Masking & Blending**:
-  * Pure transparent cutout with **no background box**
-  * Top and torso 100% crisp and clear
-  * Bottom 16% smoothly feathered via CSS mask: `linear-gradient(to bottom, black 84%, transparent 100%)`
-  * Secondary ground vignette: `from-[var(--bg)] via-[var(--bg)]/40 to-transparent` (height `64px`)
+* **Dimensions (Fluid Responsive)**: Mobile `max-h-[320px]`, Tablet `max-h-[360px] md:max-h-[400px]`, Desktop `lg:max-h-[460px] xl:max-h-[480px]`, width `auto`, `object-contain object-bottom`
+* **Multi-Directional Feather Mask**:
+  * Clean, natural head and torso (100% sharp)
+  * Left & Right Edge Feathering: `linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)` (eliminates all sharp cut edges on the sides)
+  * Bottom Vertical Feathering: `linear-gradient(to bottom, black 65%, transparent 100%)`
+  * Secondary ground vignette: `from-[var(--bg)] via-[var(--bg)]/60 to-transparent` (height `80px`) seamlessly dissolving into the page background.
 
 ---
 

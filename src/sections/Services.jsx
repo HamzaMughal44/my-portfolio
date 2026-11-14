@@ -104,7 +104,7 @@ export default function Services() {
 
   return (
     <section id="services" className="scroll-mt-[88px] py-16 md:py-20 lg:py-24 bg-[var(--bg)] border-t border-[var(--border)] transition-colors duration-200">
-      <div className="max-w-6xl mx-auto px-6 md:px-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
 
         <FadeIn>
           <SectionHeader

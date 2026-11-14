@@ -40,7 +40,7 @@ export default function About() {
 
   return (
     <section id="about" className="scroll-mt-[88px] py-16 md:py-20 lg:py-24 bg-[var(--bg)] border-t border-[var(--border)] transition-colors duration-200">
-      <div className="max-w-6xl mx-auto px-6 md:px-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
 
         {/* ── Asymmetrical Editorial Layout: Header & Focus on Left, Narrative on Right ── */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
